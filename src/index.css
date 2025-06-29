@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "daisyui";
+body {
+  cursor: url('/cursors/pizza.cur'), auto;
+}
+li,a, button {
+  cursor: url('/cursors/pizza.cur'), pointer;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
