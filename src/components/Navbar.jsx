@@ -27,7 +27,13 @@ function Navbar() {
     </div>
 
     <span className="hidden lg:inline-block text-sm text-white">Время работы: с 11:00 до 23:00</span>
-    <button className="text-white font-medium text-sm flex items-center gap-2 hover:text-primary" onClick={()=>document.getElementById('my_modal_3').showModal()}>      
+    <button className="text-white font-medium text-sm flex items-center gap-2 hover:text-primary" onClick={()=> {
+      if (!user) {
+        document.getElementById('my_modal_3').showModal()
+      }else {
+        
+      }
+    }}>      
 
     <FaUser />
     <span>{user ? user.name : "Войти в аккаунт"}</span>
