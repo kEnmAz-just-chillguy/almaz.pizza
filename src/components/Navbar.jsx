@@ -6,14 +6,10 @@ import { IoDiamond } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-function Navbar() {
-  const [user,setUser] = useState('')
-      useEffect(() => {
-       setUser(JSON.parse(localStorage.getItem("registerData")))
+function Navbar({user}) {
 
-      },[])
     return (
-        <div className='sticky top-0 z-50 bg-opacity-80 backdrop-blur-md h-full'>
+        <div className=' bg-opacity-80 backdrop-blur-md h-full'>
 
     <header className="shadow text-white ">
 
@@ -31,7 +27,7 @@ function Navbar() {
       if (!user) {
         document.getElementById('my_modal_3').showModal()
       }else {
-        
+        document.getElementById('my_modal_1').showModal()
       }
     }}>      
 

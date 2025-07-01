@@ -17,7 +17,18 @@ import SecondNavbar from './components/SecondNavbar'
 function App() {
 const [menu,setMenu] = useState([])
 const [bucket,setBucket] = useState([])
+const [user,setUser] = useState('')
+useEffect(() => {
+ setUser(JSON.parse(localStorage.getItem("registerData")))
+
+},[])
 const [registerError,setRegisterError] = useState({
+  registerAll:false,
+  name:false,
+  email:false,
+  password:false,
+})
+const [signInError,setSignInError] = useState({
   registerAll:false,
   name:false,
   email:false,
@@ -29,6 +40,7 @@ const [registerData, setRegisterData] = useState({
   password:"",
 })
 const [signInData, setSignInData] = useState({
+  name:"",
   email:"",
   password:"",
 })
@@ -46,7 +58,12 @@ const regexName = /^[A-Za-zА-Яа-яЁё]{8,16}$/;
     })
   },[])
 
-
+const removeUser = () => {
+  if (localStorage.getItem('registerData')) {
+    localStorage.removeItem('registerData');
+  }
+  window.location.reload()
+}
 
 const handleSubmitRegister = (e) => {
   e.preventDefault();
@@ -100,6 +117,56 @@ setTimeout(() => {
 
 
 }
+const handleSubmitSignIn = (e) => {
+e.preventDefault();
+
+if(!signInData.email || !signInData.password || !signInData.name) {
+  setSignInError(prevState => ({
+    ...prevState,
+    registerAll:true
+  }))
+}else if(!regexName.test(signInData.name)){
+  setSignInError(prevState =>({
+    ...prevState,
+    name:true
+  }))
+}
+else if (!regexEmail.test(signInData.email)){
+
+  setSignInError(prevState => ({
+    ...prevState,
+    email:true
+  }))
+}else if(!regexPassword.test(signInData.password)){
+  setSignInError(prevState => ({
+    ...prevState,
+    password:true
+  }))
+}
+else {localStorage.setItem("registerData", JSON.stringify(signInData))
+  window.location.reload()
+
+}
+
+setTimeout(() => {
+  setSignInError(prevState => ({
+    ...prevState,
+    registerAll:false
+  }))
+  setSignInError(prevState => ({
+    ...prevState,
+    name:false
+  }))
+  setSignInError(prevState => ({
+    ...prevState,
+    email:false
+  }) )
+  setSignInError(prevState => ({
+    ...prevState,
+    password:false
+  }))
+}, 2000);
+}
 
 
 const isBucked = location.pathname === "/bucket"
@@ -109,7 +176,7 @@ const isBucked = location.pathname === "/bucket"
  {isBucked &&  <SecondNavbar/>}
 
      <Routes>
-      <Route path='/' element={<HomePage menu={menu}/>}/>
+      <Route path='/' element={<HomePage user={user} menu={menu}/>}/>
 
   
    <Route path='/bucket' element={<BucketPage  menu={menu}/>}/>
@@ -159,10 +226,24 @@ const isBucked = location.pathname === "/bucket"
   <div className="modal-box">
   <div className='flex flex-col gap-3 justify-center text-center'>
   <h3 className="font-bold text-xl">Вход</h3>
-<input type="email" className='border-primary hover:border-black border-2 rounded-sm w-full pt-4 px-2 pb-1 placeholder:text-2xl text-2xl outline-none' placeholder='Эл. почта' />
-<input type="password" className='border-primary hover:border-black border-2 rounded-sm w-full pt-4 px-2 pb-1 placeholder:text-2xl text-2xl outline-none' placeholder='Пароль' />
+  <input type="text" required value={signInData.name} onChange={(e) => (setSignInData(prevState => ({
+    ...prevState,
+    name:e.target.value
+  })))} className='border-primary hover:border-black border-2 rounded-sm w-full pt-4 px-2 pb-1 placeholder:text-2xl text-2xl outline-none' placeholder='Имя' />
+   <p className='text-red-600 '>{signInError.name ? "Такого ника нету" : ""}</p>
+<input required value={signInData.email} onChange={(e) => (setSignInData(prevState => ({
+  ...prevState,
+  email:e.target.value
+})))} type="email" className='border-primary hover:border-black border-2 rounded-sm w-full pt-4 px-2 pb-1 placeholder:text-2xl text-2xl outline-none' placeholder='Эл. почта' />
+  <p className='text-red-600 '>{signInError.email ? "Неверный емайл" : ""}</p>
+<input required value={signInData.password} onChange={(e) => (setSignInData(prevState => ({
+  ...prevState,
+  password:e.target.value
+})))} type="password" className='border-primary hover:border-black border-2 rounded-sm w-full pt-4 px-2 pb-1 placeholder:text-2xl text-2xl outline-none' placeholder='Пароль' />
+       <p className='text-red-600 '>{signInError.password ? "Неправилний пароль" :""}</p>
 <p className='whitespace-pre-line'>Продолжая, вы соглашаетесь со сбором и {'\n'}обработкой персональных данных и {'\n'}пользовательским соглашением</p>
-<button className='btn hover:btn-primary text-lg fond-medium'>Войти</button>
+<button onClick={handleSubmitSignIn} className='btn hover:btn-primary text-lg fond-medium'>Войти</button>
+<p className='text-red-600 '>{signInError.registerAll ? "Пожалуйста заполните все поля" :""}</p>
 <p>Нету аккаунта?
     <form className='inline' method='dialog'>
       <button className="text-primary hover:underline underline-" onClick={()=>document.getElementById('my_modal_3').showModal()}>
@@ -174,6 +255,22 @@ const isBucked = location.pathname === "/bucket"
 <div className="modal-action">
   <form method="dialog">
     <button className="btn hover:btn-primary">Закрыть</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="my_modal_1" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Вы точно хотите выйти с аккаунта?</h3>
+    <p className="py-4">При выходе вы можете потерять доступ к некоторым функциям, таким как история заказов, персональные рекомендации и сохранённые данные.
+    Вы действительно хотите продолжить?</p>
+    <div className="modal-action flex justify-center">
+      <form method="dialog ">
+   <div className='flex gap-25'>
+   <button onClick={() => removeUser()} className='btn hover:btn-error'>Выйти</button>
+   <button className="btn hover:btn-primary  ">Отмена</button>
+   </div>
       </form>
     </div>
   </div>
