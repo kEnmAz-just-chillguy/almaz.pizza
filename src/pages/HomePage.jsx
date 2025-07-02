@@ -23,7 +23,7 @@ function HomePage({ menu, user, changeMenu,isMenuOpen }) {
   };
   return (
     <>
-      <div
+    <div
         className="relative h-full bg-cover bg-center "
         style={{ backgroundImage: "url('/pizza2.jpg')" }}
       >
