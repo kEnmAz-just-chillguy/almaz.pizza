@@ -18,10 +18,20 @@ function App() {
 const [menu,setMenu] = useState([])
 const [bucket,setBucket] = useState([])
 const [user,setUser] = useState('')
+const [isMenuOpen,setIsMenuOpen] = useState(true)
 
 const changeMenu = () => {
   const change = [...menu].sort(() => Math.random() - 0.5)
   setMenu(change)
+  const drawerCheckbox = document.getElementById("my-drawer-4");
+  if (drawerCheckbox) {
+    drawerCheckbox.checked = false;
+  }
+
+  const activeButtons = document.querySelectorAll(".drawer-side .btn-primary");
+  activeButtons.forEach((btn) => {
+    btn.classList.remove("btn-primary");
+  });
 }
 
 
@@ -183,7 +193,7 @@ const isBucked = location.pathname === "/bucket"
  {isBucked &&  <SecondNavbar user={user} />}
 
      <Routes>
-      <Route path='/' element={<HomePage changeMenu={changeMenu} user={user} menu={menu}/>}/>
+      <Route path='/' element={<HomePage isMenuOpen={isMenuOpen} changeMenu={changeMenu} user={user} menu={menu}/>}/>
 
   
    <Route path='/bucket' element={<BucketPage  menu={menu}/>}/>

@@ -5,9 +5,8 @@ import Discount from "../components/Discount";
 import MenuList from "../components/MenuList";
 import Navbar from "../components/Navbar";
 
-function HomePage({ menu, user,changeMenu }) {
+function HomePage({ menu, user, changeMenu,isMenuOpen }) {
   const [bucket, setBucket] = useState([]);
-
 
 
   useEffect(() => {
@@ -25,7 +24,7 @@ function HomePage({ menu, user,changeMenu }) {
   return (
     <>
       <div
-        className="relative h-full bg-cover bg-center"
+        className="relative h-full bg-cover bg-center "
         style={{ backgroundImage: "url('/pizza2.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/40 h-full"></div>
@@ -36,7 +35,8 @@ function HomePage({ menu, user,changeMenu }) {
         </div>
       </div>
 
-      <div>
+   <div className="">
+   <div className="">
         <div className="flex  justify-between px-16 py-7">
           <h2 id="pizza" className="font-bold text-3xl">
             Пицца
@@ -80,108 +80,97 @@ function HomePage({ menu, user,changeMenu }) {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-150 p-4">
-                  {/* Sidebar content here */}
-                  <p className="text-2xl font-medium">Порици</p>
-                  <li className="grid grid-cols-4 gap-4 mt-4 w-full">
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Огромная порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Мини порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Макси порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Семейная порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Одинарная порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Полная порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Порция на двоих</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Порция XL</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Порция XXL</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Детская порция</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Взрослая порция</p>
-                    </ul>
-                  </li>
-                  <p className="text-2xl font-medium mt-10">Добавки</p>
-                  <li className="grid grid-cols-4 gap-4 mt-4 w-full">
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: сыр</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: бекон</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: кетчуп</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: майонез</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: халапеньо</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: лук</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: огурцы</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: томаты</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Добавки: салат</p>
-                    </ul>
-                  
-                  </li>
-                  <p className="text-2xl font-medium mt-10">Время приготовления </p>
-                  <li className="grid grid-cols-4 gap-4 mt-4 w-full">
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">До 10 минут (быстро)</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">
-                        10–20 минут (стандарт)
-                      </p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Более 20 минут</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Предзаказ на время</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Завтрак (до 11:00)</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Обед ( до 15:00)</p>
-                    </ul>
-                    <ul className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl">
-                      <p className="text-sm font-bold">Ужин (после 15:00)</p>
-                    </ul>
-                  </li> 
-                  <div className="flex justify-end ">
-                 < button onClick={changeMenu} className=" btn-lg btn hover:btn-primary  mt-10"><p className="">Филтер</p></button>
-                  </div>
-                </ul>
 
-              </div>
+             
+                 <ul className="menu bg-base-200 text-base-content min-h-full w-150 p-4">
+                 <p className="text-2xl font-medium">Порици</p>
+                 <li className="grid grid-cols-4 gap-4 mt-4 w-full">
+                   {[
+                     "Огромная порция",
+                     "Мини порция",
+                     "Макси порция",
+                     "Семейная порция",
+                     "Одинарная порция",
+                     "Полная порция",
+                     "Порция на двоих",
+                     "Порция XL",
+                     "Порция XXL",
+                     "Детская порция",
+                     "Взрослая порция",
+                   ].map((text, index) => (
+                     <ul
+                       key={index}
+                       className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl"
+                       onClick={(e) =>
+                         e.currentTarget.classList.toggle("btn-primary")
+                       }
+                     >
+                       <p className="text-sm font-bold">{text}</p>
+                     </ul>
+                   ))}
+                 </li>
+
+                 <p className="text-2xl font-medium mt-10">Добавки</p>
+                 <li className="grid grid-cols-4 gap-4 mt-4 w-full">
+                   {[
+                     "Добавки: сыр",
+                     "Добавки: бекон",
+                     "Добавки: кетчуп",
+                     "Добавки: майонез",
+                     "Добавки: халапеньо",
+                     "Добавки: лук",
+                     "Добавки: огурцы",
+                     "Добавки: томаты",
+                     "Добавки: салат",
+                   ].map((text, index) => (
+                     <ul
+                       key={index}
+                       className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl"
+                       onClick={(e) =>
+                         e.currentTarget.classList.toggle("btn-primary")
+                       }
+                     >
+                       <p className="text-sm font-bold">{text}</p>
+                     </ul>
+                   ))}
+                 </li>
+
+                 <p className="text-2xl font-medium mt-10">
+                   Время приготовления{" "}
+                 </p>
+                 <li className="grid grid-cols-4 gap-4 mt-4 w-full">
+                   {[
+                     "До 10 минут (быстро)",
+                     "10–20 минут (стандарт)",
+                     "Более 20 минут",
+                     "Предзаказ на время",
+                     "Завтрак (до 11:00)",
+                     "Обед ( до 15:00)",
+                     "Ужин (после 15:00)",
+                   ].map((text, index) => (
+                     <ul
+                       key={index}
+                       className="btn btn-lg hover:btn-primary w-full text-wrap break-words rounded-xl"
+                       onClick={(e) =>
+                         e.currentTarget.classList.toggle("btn-primary")
+                       }
+                     >
+                       <p className="text-sm font-bold">{text}</p>
+                     </ul>
+                   ))}
+                 </li>
+
+                 <div className="flex justify-end ">
+                   <button
+                     onClick={changeMenu}
+                     className="btn-lg btn hover:btn-primary mt-10"
+                   >
+                     <p className="">Филтер</p>
+                   </button>
+                 </div>
+               </ul>
               
+              </div>
             </div>
           </div>
         </div>
@@ -201,7 +190,8 @@ function HomePage({ menu, user,changeMenu }) {
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-16 ">
-          {menu.filter((item) => item.type === "напитки")
+          {menu
+            .filter((item) => item.type === "напитки")
             .map((item) => (
               <Card item={item} key={item.id} addToBucket={addToBucket} />
             ))}
@@ -267,6 +257,7 @@ function HomePage({ menu, user,changeMenu }) {
             ))}
         </div>
       </div>
+   </div>
     </>
   );
 }

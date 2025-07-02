@@ -4,15 +4,15 @@ function BucketCard({item}) {
   
   return (
     
-    <div className='flex flex-row gap-5 items-center border w-full border-gray-300 p-3'>
+    <div className='flex flex-row gap-5 items-center border w-full border-gray-300 10'>
        
         <img
 
             src={item.image}
             alt="Pizza"
-            className="w-40 h-40 rounded-full mr-4"
+            className="w-75 h-50 rounded-full mr-4 "
           />
-          <div className="flex-1">
+          <div className="flex-1 ">
             <p className="font-medium">{item.name}</p>
           </div>
           <div className="flex items-center gap-2">
