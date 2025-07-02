@@ -18,6 +18,13 @@ function App() {
 const [menu,setMenu] = useState([])
 const [bucket,setBucket] = useState([])
 const [user,setUser] = useState('')
+
+const changeMenu = () => {
+  const change = [...menu].sort(() => Math.random() - 0.5)
+  setMenu(change)
+}
+
+
 useEffect(() => {
  setUser(JSON.parse(localStorage.getItem("registerData")))
 
@@ -173,10 +180,10 @@ const isBucked = location.pathname === "/bucket"
 
   return (
     <>
- {isBucked &&  <SecondNavbar/>}
+ {isBucked &&  <SecondNavbar user={user} />}
 
      <Routes>
-      <Route path='/' element={<HomePage user={user} menu={menu}/>}/>
+      <Route path='/' element={<HomePage changeMenu={changeMenu} user={user} menu={menu}/>}/>
 
   
    <Route path='/bucket' element={<BucketPage  menu={menu}/>}/>

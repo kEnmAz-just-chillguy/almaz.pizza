@@ -14,6 +14,7 @@ function BucketPage({}) {
   }, [])
 
   return (
+    <>
 <div className="flex justify-center py-8">
       <div className="flex justify-center flex-col">
         <h2 className="font-bold text-2xl mb-4">Ваша Корзина</h2>
@@ -28,6 +29,7 @@ function BucketPage({}) {
           </div>
       </div>
     </div>
+    </>
   )
 }
 
